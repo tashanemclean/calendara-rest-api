@@ -1,0 +1,13 @@
+.idea
+ClearConnectUserGuide.pdf
+vendor
+tmp
+local.yaml
+bin
+
+# General
+.DS_Store
+
+.vscode
+
+dev.json
