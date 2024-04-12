@@ -2,7 +2,6 @@ package classify
 
 import (
 	"fmt"
-	"strconv"
 
 	"github.com/tashanemclean/genai-rest-api/internal/request"
 	"github.com/tashanemclean/genai-rest-api/util/config"
@@ -19,14 +18,10 @@ func ClassifyText(classifyText string) (*ClassificationResult,error) {
 		"Content-Type": "appliccation/json",
 	}
 
-	// ensure arg passes is text type
-	text, err := strconv.Atoi(classifyText)
-	if err != nil {
-		return nil,err
-	}
+	// TODO ensure type is string
 
 	params := RequestParams{
-		"text": text,
+		"text": classifyText,
 	}
 
 	url := fmt.Sprintf("%s/api/text", config.Config.ApiBaseUrl)

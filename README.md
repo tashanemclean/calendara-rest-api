@@ -34,3 +34,16 @@ To run , run:
 ```
 $ go run main.go
 ```
+
+### Usage example
+
+The ClassifyText api can be tested via http POST to /v1/classifytext with text
+as payload.
+
+```
+curl --location 'http://localhost:8080/v1/classifytext' \
+--header 'Content-Type: text/plain' \
+--data '{
+    "text": "When was the movie Citizen Kane released?"
+}'
+```
