@@ -47,3 +47,9 @@ curl --location 'http://localhost:8080/v1/classifytext' \
     "text": "When was the movie Citizen Kane released?"
 }'
 ```
+
+## Limitations
+
+Take care when exceeding your plan quota, the api will fail and you may need to
+adjust your billing details, read the docs:
+https://platform.openai.com/docs/guides/error-codes/api-errors.
