@@ -58,3 +58,9 @@ curl --location 'http://localhost:8080/v1/classifytext' \
 Take care when exceeding your plan quota, the api will fail and you may need to
 adjust your billing details, read the docs:
 https://platform.openai.com/docs/guides/error-codes/api-errors.
+
+## Notes
+
+Environment variables passed into containers are strictly for testing, it is
+recommended that these are omitted in lieu of secrets.
+[Read the docs](https://docs.docker.com/compose/environment-variables/set-environment-variables/)
