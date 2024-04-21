@@ -47,7 +47,7 @@ as payload.
 
 ```
 curl --location 'http://localhost:8080/v1/classifytext' \
---header 'Content-Type: text/plain' \
+--header 'Content-Type: application/json' \
 --data '{
     "text": "When was the movie Citizen Kane released?"
 }'
