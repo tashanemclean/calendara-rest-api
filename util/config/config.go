@@ -17,6 +17,7 @@ type config struct {
 	Env 	string `mapstructure:"ENVIRONMENT"`
 	AppPort string `mapstructure:"PORT"`
 	ApiBaseUrl string `mapstructure:"API_BASE_URL"`
+	DatabaseConnectionURL  string `mapstructure:"DATABASE_CONNECTION_URL"`
 }
 
 var Config config
@@ -44,7 +45,7 @@ func Load() {
 	switch os.Getenv("ENVIRONMENT") {
 	case "production":
 		setEnv()
-	case "stagging":
+	case "staging":
 		setEnv()
 	default:
 		loadLocalConfig()

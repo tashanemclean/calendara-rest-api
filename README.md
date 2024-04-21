@@ -35,6 +35,11 @@ To run , run:
 $ go run main.go
 ```
 
+### Running in docker
+
+The port need to be explicitly set in `main.go` when testing in docker
+environment
+
 ### Usage example
 
 The ClassifyText api can be tested via http POST to /v1/classifytext with text
