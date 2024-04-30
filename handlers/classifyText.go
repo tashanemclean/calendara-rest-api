@@ -6,8 +6,8 @@ import (
 	"github.com/labstack/gommon/log"
 
 	"github.com/labstack/echo/v4"
-	"github.com/tashanemclean/genai-rest-api/args"
-	"github.com/tashanemclean/genai-rest-api/internal/interactor"
+	"github.com/tashanemclean/calendara-rest-api-api/args"
+	"github.com/tashanemclean/calendara-rest-api-api/internal/interactor"
 )
 
 func ClassifyText(c echo.Context) error {

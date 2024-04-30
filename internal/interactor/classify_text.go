@@ -3,7 +3,7 @@ package interactor
 import (
 	"log"
 
-	"github.com/tashanemclean/genai-rest-api/internal/classify"
+	"github.com/tashanemclean/calendara-rest-api-api/internal/classify"
 )
 
 type ClassifyTextArgs struct {

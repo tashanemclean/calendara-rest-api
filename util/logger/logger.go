@@ -30,7 +30,7 @@ func SetupLogger() {
 	}
 
 	handler := slog.NewJSONHandler(os.Stdout, options)
-	logger = slog.New(handler.WithAttrs([]slog.Attr{slog.Any("caller", "genai-rest-api")}))
+	logger = slog.New(handler.WithAttrs([]slog.Attr{slog.Any("caller", "calendara-rest-api-api")}))
 }
 
 func GetLogLevel() slog.Level {

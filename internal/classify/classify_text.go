@@ -3,8 +3,8 @@ package classify
 import (
 	"fmt"
 
-	"github.com/tashanemclean/genai-rest-api/internal/request"
-	"github.com/tashanemclean/genai-rest-api/util/config"
+	"github.com/tashanemclean/calendara-rest-api-api/internal/request"
+	"github.com/tashanemclean/calendara-rest-api-api/util/config"
 )
 
 type RequestParams map[string]interface{}

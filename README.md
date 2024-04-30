@@ -1,4 +1,4 @@
-# genai-rest-api
+# calendara-rest-api-api
 
 ## Section 1: Local Development Environment Setup
 

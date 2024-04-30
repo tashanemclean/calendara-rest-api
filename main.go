@@ -6,9 +6,9 @@ import (
 
 	"github.com/labstack/echo/v4"
 
-	"github.com/tashanemclean/genai-rest-api/router"
-	"github.com/tashanemclean/genai-rest-api/util/config"
-	"github.com/tashanemclean/genai-rest-api/util/logger"
+	"github.com/tashanemclean/calendara-rest-api-api/router"
+	"github.com/tashanemclean/calendara-rest-api-api/util/config"
+	"github.com/tashanemclean/calendara-rest-api-api/util/logger"
 )
 
 func init() {

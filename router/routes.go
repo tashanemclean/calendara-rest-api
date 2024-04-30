@@ -4,7 +4,7 @@ import (
 	"github.com/labstack/echo-contrib/echoprometheus"
 	"github.com/labstack/echo/v4"
 
-	"github.com/tashanemclean/genai-rest-api/handlers"
+	"github.com/tashanemclean/calendara-rest-api-api/handlers"
 )
 
 func RegisterRoutes(e *echo.Echo) {

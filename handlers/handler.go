@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/tashanemclean/genai-rest-api/args"
+	"github.com/tashanemclean/calendara-rest-api-api/args"
 )
 
 func GetQueryParams[T args.Args](c *echo.Context) (*T, error) {

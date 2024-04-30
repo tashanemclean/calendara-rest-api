@@ -6,7 +6,7 @@ import (
 	"runtime"
 
 	"github.com/labstack/gommon/log"
-	utils "github.com/tashanemclean/genai-rest-api/util"
+	utils "github.com/tashanemclean/calendara-rest-api-api/util"
 
 	"github.com/spf13/viper"
 )

@@ -1,4 +1,4 @@
-module github.com/tashanemclean/genai-rest-api
+module github.com/tashanemclean/calendara-rest-api-api
 
 go 1.22.2
 
