@@ -30,4 +30,4 @@ COPY --from=builder ./app/bin /app/bin
 # Copy db migrations directory
 COPY --from=builder /app/internal/db/migrations /app/internal/db/migrations
 
-ENTRYPOINT [ "/app/bin/genai_rest_api" ]
+ENTRYPOINT [ "/app/bin/calendara_rest_api" ]

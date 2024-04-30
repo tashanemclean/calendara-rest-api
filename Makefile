@@ -1,7 +1,7 @@
 # Makefile 
 # VERSION := $(shell git describe --tags --first-parent --abbrev=0)
 BUILD := $(shell git rev-parse --short HEAD)
-PROJECTNAME := genai_rest_api
+PROJECTNAME := calendara_rest_api
 
 # Go related variables.
 GOHOME := $(shell go env GOPATH)

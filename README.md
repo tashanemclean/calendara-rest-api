@@ -3,7 +3,7 @@
 ## Section 1: Local Development Environment Setup
 
 This microservice is designed as to be the REST API gateway for the service
-[genai-backend](https://github.com/tashanemclean/genai-backend)
+[calendara-backend](https://github.com/tashanemclean/calendara-backend)
 
 ### Setup Local Environment
 
