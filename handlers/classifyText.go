@@ -18,7 +18,11 @@ func ClassifyText(c echo.Context) error {
 	}
 
 	result := interactor.ClassifyText(interactor.ClassifyTextArgs{
-		Text: params.Text,
+		Activity: params.Activity,
+		Categories: params.Categories,
+		City: params.City,
+		State: params.State,
+		Days: params.Days,
 	}).Execute()
 
 	if result.IsError() {
