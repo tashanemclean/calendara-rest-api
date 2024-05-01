@@ -8,14 +8,15 @@ import (
 )
 
 type RequestParams map[string]interface{}
-
 type ClassificationResult struct {
-	
+	Activities any
+	Location   string   `json:"location"`
+	Duration   string   `json:"duration"`
 }
 
 func ClassifyText(classifyText string) (*ClassificationResult,error) {
 	headers := map[string]string{
-		"Content-Type": "appliccation/json",
+		"Content-Type": "application/json",
 	}
 
 	// TODO ensure type is string
@@ -26,7 +27,6 @@ func ClassifyText(classifyText string) (*ClassificationResult,error) {
 
 	url := fmt.Sprintf("%s/api/text", config.Config.ApiBaseUrl)
 	result, err := request.Post[ClassificationResult](url, params, headers)
-
 	if err != nil || result == nil {
 		return nil, err
 	}

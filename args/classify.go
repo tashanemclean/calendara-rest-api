@@ -1,5 +1,5 @@
 package args
 
 type ClassifyText struct {
-	Text string `json:"text"`
+	Text string `body:"text"`
 }

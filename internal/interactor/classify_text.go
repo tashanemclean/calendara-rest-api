@@ -6,19 +6,24 @@ import (
 	"github.com/tashanemclean/calendara-rest-api-api/internal/classify"
 )
 
+type ClassificationResult struct {
+	Activities any
+	Location string
+	Duration string
+}
 type ClassifyTextArgs struct {
 	Text string
 }
 
 type ClassifyTextResult struct {
 	*BaseResult
-	ClassifyResult any
+	*ClassificationResult
 }
 
 type classifyText struct {
 	text string
 	errors []error
-	data any
+	data ClassificationResult
 	// TODO define custom Manager for text classfication
 	// classifyTextManager *classifyTextManager
 
@@ -27,10 +32,14 @@ type classifyText struct {
 func (ia *classifyText) Execute() ClassifyTextResult {
 	result, err := classify.ClassifyText(ia.text)
 	if err != nil {
-		log.Fatal("Error classfying text", err)
+		log.Fatal("Error classfying text ", err)
 		return ia.fail(err)
 	}
-	ia.data = result
+	ia.data = ClassificationResult{
+		Activities: result.Activities,
+		Duration: result.Duration,
+		Location: result.Location,
+	}
 	return ia.makeResult()
 }
 
@@ -41,7 +50,11 @@ func (ia *classifyText) fail(err error) ClassifyTextResult {
 
 func (ia *classifyText) makeResult() ClassifyTextResult {
 	return ClassifyTextResult{
-		ClassifyResult: ia.data,
+		ClassificationResult: &ClassificationResult{
+			Activities: ia.data.Activities,
+			Duration: ia.data.Duration , 
+			Location: ia.data.Location,
+		},
 		BaseResult: &BaseResult{
 			Errors: ia.errors,
 			Success: len(ia.errors) == 0,
