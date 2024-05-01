@@ -6,6 +6,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 
+	"github.com/tashanemclean/calendara-rest-api-api/internal/middleware"
 	"github.com/tashanemclean/calendara-rest-api-api/router"
 	"github.com/tashanemclean/calendara-rest-api-api/util/config"
 	"github.com/tashanemclean/calendara-rest-api-api/util/logger"
@@ -18,6 +19,7 @@ func init() {
 
 func main() {
 	e := echo.New()
+	middleware.Register((e))
 	router.RegisterRoutes(e)
 	port := config.Config.AppPort
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", port)))
