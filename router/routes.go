@@ -11,7 +11,7 @@ func RegisterRoutes(e *echo.Echo) {
 	// TODO config validatior for server
 
 	// Health check route
-	e.GET("/health", handlers.Healthcheck)
+	e.GET("/", handlers.Healthcheck)
 	e.GET("status", echoprometheus.NewHandler())
 	e.GET("/v1", handlers.Default)
 

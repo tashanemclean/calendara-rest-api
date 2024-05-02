@@ -22,7 +22,7 @@ configs/dev.json
 ```
 
 ```
-"PORT": "8080",
+"PORT": "80",
 "ENVIRONMENT": "dev",
 "API_BASE_URL": "http://localhost:9000"
 ```
