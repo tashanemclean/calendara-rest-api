@@ -33,4 +33,4 @@ COPY --from=builder /app/internal/db/migrations /app/internal/db/migrations
 # expose port 80
 EXPOSE 9000
 
-ENTRYPOINT [ "/app/bin/calendara_rest_api" ]
+CMD [ "/app/bin/main" ]
