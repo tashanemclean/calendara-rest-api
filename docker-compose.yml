@@ -10,7 +10,7 @@ services:
             - ENVIRONMENT=staging
             - API_BASE_URL=http://localhost:9000
         ports:
-            - "8080:8080"
+            - "9000:9000"
 
     postgres_db:
         image: postgres:14.6-alpine
