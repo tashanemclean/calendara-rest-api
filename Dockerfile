@@ -30,7 +30,4 @@ COPY --from=builder ./app/bin /app/bin
 # Copy db migrations directory
 COPY --from=builder /app/internal/db/migrations /app/internal/db/migrations
 
-# expose port 80
-EXPOSE 9000
-
-CMD [ "/app/bin/main" ]
+CMD [ "/app/bin/calendara_rest_api" ]
