@@ -22,6 +22,6 @@ func main() {
 	middleware.Register((e))
 	router.RegisterRoutes(e)
 	// port := config.Config.AppPort
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", "8080")))
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", "9000")))
 	slog.Info("Server Started")
 }
