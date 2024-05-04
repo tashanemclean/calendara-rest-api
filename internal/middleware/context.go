@@ -27,6 +27,7 @@ func Register(e *echo.Echo) {
 		AllowOrigins: []string{fmt.Sprintf("http://localhost:%s", config.Config.AppPort), "http://calendara.io"},
 		AllowMethods: []string{http.MethodOptions, http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 		AllowCredentials: true,
+		AllowHeaders: []string{"Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"},
 	}))
 
 	e.Use(echoMiddleware.RequestLoggerWithConfig(echoMiddleware.RequestLoggerConfig{
