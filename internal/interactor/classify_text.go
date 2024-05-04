@@ -2,10 +2,7 @@ package interactor
 
 import (
 	"fmt"
-	"log"
 	"strconv"
-
-	"github.com/tashanemclean/calendara-rest-api-api/internal/classify"
 )
 
 var activitiesIndex = []BaseArgs{
@@ -57,16 +54,24 @@ type classifyText struct {
 
 func (ia *classifyText) Execute() ClassifyTextResult {
 	ia.prepareData()
-	result, err := classify.ClassifyText(ia.textPrompt)
-	if err != nil {
-		log.Fatal("Error classfying text ", err)
-		return ia.fail(err)
-	}
+	// result, err := classify.ClassifyText(ia.textPrompt)
+	// if err != nil {
+	// 	log.Fatal("Error classfying text ", err)
+	// 	return ia.fail(err)
+	// }
+	actv := []string{"some", "stuff"}
+	dur := "string"
+	loc := "string"
 	ia.data = ClassificationResult{
-		Activities: result.Activities,
-		Duration: result.Duration,
-		Location: result.Location,
+		Activities: actv,
+		Duration: dur,
+		Location: loc,
 	}
+	// ia.data = ClassificationResult{
+	// 	Activities: result.Activities,
+	// 	Duration: result.Duration,
+	// 	Location: result.Location,
+	// }
 	return ia.makeResult()
 }
 // 	Loop activities, if payload activity predicate,
