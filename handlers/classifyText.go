@@ -31,6 +31,7 @@ func ClassifyText(c echo.Context) error {
 	}
 
 	log.Info("ClassifyText request", err)
+	c.Response().Header().Set("Access-Control-Allow-Origin", "*")
 
 	return c.JSON(http.StatusOK, result)
 }
