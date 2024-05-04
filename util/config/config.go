@@ -4,9 +4,9 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 
 	"github.com/labstack/gommon/log"
-	utils "github.com/tashanemclean/calendara-rest-api-api/util"
 
 	"github.com/spf13/viper"
 )
@@ -28,9 +28,10 @@ func setEnv() {
 
 	// Need to bind keys manual using BindEnv
 	// https://github.com/spf13/viper/issues/761
-	keys := utils.GetStructTagVals("mapstucture", Config)
-	for _, item := range keys {
-		viper.BindEnv(item)
+	keys := environ()
+
+	for v, k := range keys {
+		viper.BindEnv(v, k)
 	}
 
 	// Unmarshal keys into config map 
@@ -40,6 +41,16 @@ func setEnv() {
 		log.Fatalf("Cannot decode into map struct, %v", err)
 	}
 }
+
+func environ() map[string]string {
+	m := make(map[string]string)
+	for _, s := range os.Environ() {
+		 a := strings.Split(s, "=")
+		 m[a[0]] = a[1]
+	}
+	return m
+}
+
 
 func Load() {
 	switch os.Getenv("ENVIRONMENT") {

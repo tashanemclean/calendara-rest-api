@@ -26,6 +26,7 @@ func ClassifyText(classifyText string) (*ClassificationResult,error) {
 	}
 
 	url := fmt.Sprintf("%s/api/text", config.Config.ApiBaseUrl)
+	fmt.Println(url, "*** url being used")
 	result, err := request.Post[ClassificationResult](url, params, headers)
 	if err != nil || result == nil {
 		return nil, err

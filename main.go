@@ -21,7 +21,7 @@ func main() {
 	e := echo.New()
 	middleware.Register((e))
 	router.RegisterRoutes(e)
-	// port := config.Config.AppPort
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", "9000")))
+	port := config.Config.AppPort
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", port)))
 	slog.Info("Server Started")
 }
