@@ -24,7 +24,7 @@ func Register(e *echo.Echo) {
 	e.Use(echoprometheus.NewMiddleware("calendaraBackend"))
 	e.Use(echoMiddleware.Recover())
 	e.Use(echoMiddleware.CORSWithConfig(echoMiddleware.CORSConfig{
-		AllowOrigins: []string{"*", fmt.Sprintf("http://localhost:%s", config.Config.AppPort)},
+		AllowOrigins: []string{"*", fmt.Sprintf("http://localhost:%s", config.Config.AppPort), "http://calendara.io"},
 		AllowMethods: []string{http.MethodOptions, http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
 
