@@ -19,8 +19,10 @@ func Post[T any](url string, obj any, headers RequestHeaders) (*T, error) {
 		return nil, err
 	}
 
+	var results map[string]interface{}
+
 	var t *T
-	err = json.Unmarshal(resp, &t)
+	err = json.Unmarshal(resp, &results)
 
 	if err != nil {
 		return nil, err
