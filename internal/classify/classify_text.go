@@ -31,8 +31,13 @@ func ClassifyText(classifyText string) (ClassificationResult,error) {
 		return ClassificationResult{}, err
 	}
 
-	iter := getIter(*raw_result)
-	result := toResultsStruct(iter)
+	var result ClassificationResult
+	values := reflect.ValueOf(*raw_result)
+	if values.Kind().String() == "map" {
+		iter := getIter(*raw_result)
+		result = toResultsStruct(iter)
+	}
+
 
 	return result, nil
 }
