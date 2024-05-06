@@ -2,7 +2,6 @@ package interactor
 
 import (
 	"fmt"
-	"log"
 	"strconv"
 
 	"github.com/tashanemclean/calendara-rest-api-api/internal/classify"
@@ -59,7 +58,6 @@ func (ia *classifyText) Execute() ClassifyTextResult {
 	ia.prepareData()
 	result, err := classify.ClassifyText(ia.textPrompt)
 	if err != nil {
-		log.Fatal("Error classifying text ", err)
 		return ia.fail(err)
 	}
 	ia.data = ClassificationResult{
