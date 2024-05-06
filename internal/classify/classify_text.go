@@ -12,7 +12,7 @@ type ClassificationResult struct {
 	Activities interface{} `json:"activities"`
 }
 
-func ClassifyText(classifyText string) (*interface{},error) {
+func ClassifyText(classifyText string) (*ClassificationResult,error) {
 	headers := map[string]string{
 		"Content-Type": "application/json",
 	}
@@ -23,7 +23,7 @@ func ClassifyText(classifyText string) (*interface{},error) {
 	}
 
 	url := fmt.Sprintf("%s/api/text", config.Config.ApiBaseUrl)
-	raw_result, err := request.Post[interface{}](url, params, headers)
+	result, err := request.Post[ClassificationResult](url, params, headers)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ func ClassifyText(classifyText string) (*interface{},error) {
 	// 	result = toResultsStruct(iter)
 	// }
 
-	return raw_result, nil
+	return result, nil
 }
 
 // func getIter(data interface{}) *reflect.MapIter {
