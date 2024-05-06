@@ -33,11 +33,13 @@ func ClassifyText(classifyText string) (ClassificationResult,error) {
 
 	var result ClassificationResult
 	values := reflect.ValueOf(*raw_result)
+	fmt.Println(values, "** values")
 	if values.Kind().String() == "map" {
+		fmt.Println("is map type")
 		iter := getIter(*raw_result)
 		result = toResultsStruct(iter)
+		fmt.Println(result, "*** result")
 	}
-
 
 	return result, nil
 }
@@ -52,6 +54,8 @@ func toResultsStruct(iter *reflect.MapIter ) ClassificationResult {
 	for iter.Next() {
 		k := iter.Key()
 		v := iter.Value()
+		fmt.Println(k, "*** v")
+		fmt.Println(v, "*** v")
 		if k.String() == "activities" {
 			result.Activities = v.Interface()
 		}
