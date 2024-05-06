@@ -59,7 +59,7 @@ func (ia *classifyText) Execute() ClassifyTextResult {
 	ia.prepareData()
 	result, err := classify.ClassifyText(ia.textPrompt)
 	if err != nil {
-		log.Fatal("Error classfying text ", err)
+		log.Fatal("Error classifying text ", err)
 		return ia.fail(err)
 	}
 	ia.data = ClassificationResult{
