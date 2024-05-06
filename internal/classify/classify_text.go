@@ -9,9 +9,7 @@ import (
 
 type RequestParams map[string]interface{}
 type ClassificationResult struct {
-	Activities interface{}           `json:"activities"`
-	Location   string          `json:"location"`
-	Duration   string          `json:"duration"`
+	Activities interface{} `json:"activities"`
 }
 
 func ClassifyText(classifyText string) (*interface{},error) {

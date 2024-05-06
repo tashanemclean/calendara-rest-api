@@ -27,9 +27,7 @@ type BaseArgs struct {
 }
 
 type ClassificationResult struct {
-	Activities interface{}           `json:"Activities"`
-	Location  string           `json:"Location"`
-	Duration  string           `json:"Duration"`
+	Activities interface{} `json:"Activities"`
 }
 type ClassifyTextArgs struct {
 	Activity    []string       `body:"activity"`
