@@ -31,48 +31,32 @@ func ClassifyText(classifyText string) (ClassificationResult,error) {
 		return ClassificationResult{}, err
 	}
 
-	values := reflect.ValueOf(*raw_result)
-	keys := getMapKeys(values)
-	result := toResultsStruct(values, keys)
-
-	// r := &ClassificationResult{
-	// 	Activities: []string{"some"},
-	// 	Duration: "",
-	// 	Location: "",
-	// }
+	iter := getIter(*raw_result)
+	result := toResultsStruct(iter)
 
 	return result, nil
 }
 
-func getMapKeys(values reflect.Value)[]reflect.Value {
-	var mapKeys []reflect.Value
-	if values.Kind().String() == "map" {
-		mapKeys = append(mapKeys, values.MapKeys()...)
-	}
-	return mapKeys
+func getIter(data interface{}) *reflect.MapIter {
+	iter := reflect.ValueOf(data).MapRange()
+	return iter
 }
 
-func toResultsStruct(values reflect.Value,keys []reflect.Value) ClassificationResult {
+func toResultsStruct(iter *reflect.MapIter ) ClassificationResult {
 	var result ClassificationResult
-	for _, key := range keys {
-		if key.String() == "activities" {
-			value := values.MapIndex(key)
-			result = ClassificationResult{
-				Activities:  value.Interface(),
-			}
+	for iter.Next() {
+		k := iter.Key()
+		v := iter.Value()
+		if k.String() == "activities" {
+			result.Activities = v.Interface()
 		}
-		if key.String() == "duration" {
-			value := values.MapIndex(key)
-			result = ClassificationResult{
-				Duration: fmt.Sprintf("%v",value.Interface()),
-			}
+		if k.String() == "duration" {
+			result.Duration = fmt.Sprintf("%v", v.Interface())
 		}
-		if key.String() == "location" {
-			value := values.MapIndex(key)
-			result = ClassificationResult{
-				Location: fmt.Sprintf("%v",value.Interface()),
-			}
+		if k.String() == "location" {
+			result.Location = fmt.Sprintf("%v", v.Interface())
 		}
 	}
+
 	return result
 }
