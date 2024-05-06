@@ -26,9 +26,17 @@ func ClassifyText(classifyText string) (*ClassificationResult,error) {
 	}
 
 	url := fmt.Sprintf("%s/api/text", config.Config.ApiBaseUrl)
-	result, err := request.Post[ClassificationResult](url, params, headers)
+	raw_result, err := request.Post[interface{}](url, params, headers)
 	if err != nil {
 		return nil, err
+	}
+
+	fmt.Println(*&raw_result, "** raw result")
+
+	result := &ClassificationResult{
+		Activities: []string{"some"},
+		Duration: "",
+		Location: "",
 	}
 
 	return result, nil
