@@ -10,9 +10,9 @@ import (
 
 type RequestParams map[string]interface{}
 type ClassificationResult struct {
-	Activities any      `json:"activities"`
-	Location   string           `json:"location"`
-	Duration   string           `json:"duration"`
+	Activities interface{}           `json:"activities"`
+	Location   string          `json:"location"`
+	Duration   string          `json:"duration"`
 }
 
 func ClassifyText(classifyText string) (ClassificationResult,error) {
@@ -31,29 +31,9 @@ func ClassifyText(classifyText string) (ClassificationResult,error) {
 		return ClassificationResult{}, err
 	}
 
-	var result ClassificationResult
 	values := reflect.ValueOf(*raw_result)
-	if values.Kind().String() == "map" {
-		for _, key := range values.MapKeys() {
-			value := values.MapIndex(key)
-			if key.String() == "activities" {
-				result = ClassificationResult{
-					Activities:  value.Interface(),
-				}
-			}
-			if key.String() == "duration" {
-				result = ClassificationResult{
-					Duration: value.String(),
-				}
-			}
-			if key.String() == "location" {
-				result = ClassificationResult{
-					Location: value.String(),
-				}
-			}
-	
-		}
-	}
+	keys := getMapKeys(values)
+	result := toResultsStruct(values, keys)
 
 	// r := &ClassificationResult{
 	// 	Activities: []string{"some"},
@@ -62,4 +42,37 @@ func ClassifyText(classifyText string) (ClassificationResult,error) {
 	// }
 
 	return result, nil
+}
+
+func getMapKeys(values reflect.Value)[]reflect.Value {
+	var mapKeys []reflect.Value
+	if values.Kind().String() == "map" {
+		mapKeys = append(mapKeys, values.MapKeys()...)
+	}
+	return mapKeys
+}
+
+func toResultsStruct(values reflect.Value,keys []reflect.Value) ClassificationResult {
+	var result ClassificationResult
+	for _, key := range keys {
+		if key.String() == "activities" {
+			value := values.MapIndex(key)
+			result = ClassificationResult{
+				Activities:  value.Interface(),
+			}
+		}
+		if key.String() == "duration" {
+			value := values.MapIndex(key)
+			result = ClassificationResult{
+				Duration: fmt.Sprintf("%v",value.Interface()),
+			}
+		}
+		if key.String() == "location" {
+			value := values.MapIndex(key)
+			result = ClassificationResult{
+				Location: fmt.Sprintf("%v",value.Interface()),
+			}
+		}
+	}
+	return result
 }
