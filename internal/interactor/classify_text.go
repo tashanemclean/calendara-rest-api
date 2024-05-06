@@ -41,14 +41,14 @@ type ClassifyTextArgs struct {
 
 type ClassifyTextResult struct {
 	*BaseResult
-	*ClassificationResult
+	ClassificationResult interface{}
 }
 
 type classifyText struct {
 	textPrompt string
 	rawDataArgs ClassifyTextArgs
 	errors []error
-	data ClassificationResult
+	data interface{}
 	// TODO define custom Manager for text classfication
 	// classifyTextManager *classifyTextManager
 
@@ -60,11 +60,7 @@ func (ia *classifyText) Execute() ClassifyTextResult {
 	if err != nil {
 		return ia.fail(err)
 	}
-	ia.data = ClassificationResult{
-		Activities: result.Activities,
-		Duration: result.Duration,
-		Location: result.Location,
-	}
+	ia.data = result
 	return ia.makeResult()
 }
 // 	Loop activities, if payload activity predicate,
@@ -103,11 +99,7 @@ func (ia *classifyText) fail(err error) ClassifyTextResult {
 
 func (ia *classifyText) makeResult() ClassifyTextResult {
 	return ClassifyTextResult{
-		ClassificationResult: &ClassificationResult{
-			Activities: ia.data.Activities,
-			Duration: ia.data.Duration , 
-			Location: ia.data.Location,
-		},
+		ClassificationResult: ia.data,
 		BaseResult: &BaseResult{
 			Errors: ia.errors,
 			Success: len(ia.errors) == 0,

@@ -2,7 +2,6 @@ package classify
 
 import (
 	"fmt"
-	"reflect"
 
 	"github.com/tashanemclean/calendara-rest-api-api/internal/request"
 	"github.com/tashanemclean/calendara-rest-api-api/util/config"
@@ -15,7 +14,7 @@ type ClassificationResult struct {
 	Duration   string          `json:"duration"`
 }
 
-func ClassifyText(classifyText string) (ClassificationResult,error) {
+func ClassifyText(classifyText string) (*interface{},error) {
 	headers := map[string]string{
 		"Content-Type": "application/json",
 	}
@@ -28,44 +27,39 @@ func ClassifyText(classifyText string) (ClassificationResult,error) {
 	url := fmt.Sprintf("%s/api/text", config.Config.ApiBaseUrl)
 	raw_result, err := request.Post[interface{}](url, params, headers)
 	if err != nil {
-		return ClassificationResult{}, err
+		return nil, err
 	}
 
-	var result ClassificationResult
-	values := reflect.ValueOf(*raw_result)
-	fmt.Println(values, "** values")
-	if values.Kind().String() == "map" {
-		fmt.Println("is map type")
-		iter := getIter(*raw_result)
-		result = toResultsStruct(iter)
-		fmt.Println(result, "*** result")
-	}
+	// var result ClassificationResult
+	// values := reflect.ValueOf(*raw_result)
+	// if values.Kind().String() == "map" {
+	// 	iter := getIter(*raw_result)
+	// 	result = toResultsStruct(iter)
+	// }
 
-	return result, nil
+	return raw_result, nil
 }
 
-func getIter(data interface{}) *reflect.MapIter {
-	iter := reflect.ValueOf(data).MapRange()
-	return iter
-}
+// func getIter(data interface{}) *reflect.MapIter {
+// 	iter := reflect.ValueOf(data).MapRange()
+// 	return iter
+// }
 
-func toResultsStruct(iter *reflect.MapIter ) ClassificationResult {
-	var result ClassificationResult
-	for iter.Next() {
-		k := iter.Key()
-		v := iter.Value()
-		fmt.Println(k, "*** v")
-		fmt.Println(v, "*** v")
-		if k.String() == "activities" {
-			result.Activities = v.Interface()
-		}
-		if k.String() == "duration" {
-			result.Duration = fmt.Sprintf("%v", v.Interface())
-		}
-		if k.String() == "location" {
-			result.Location = fmt.Sprintf("%v", v.Interface())
-		}
-	}
+// func toResultsStruct(iter *reflect.MapIter ) ClassificationResult {
+// 	var result ClassificationResult
+// 	for iter.Next() {
+// 		k := iter.Key()
+// 		v := iter.Value()
+// 		if k.String() == "activities" {
+// 			result.Activities = v.Interface()
+// 		}
+// 		if k.String() == "duration" {
+// 			result.Duration = fmt.Sprintf("%v", v.Interface())
+// 		}
+// 		if k.String() == "location" {
+// 			result.Location = fmt.Sprintf("%v", v.Interface())
+// 		}
+// 	}
 
-	return result
-}
+// 	return result
+// }
