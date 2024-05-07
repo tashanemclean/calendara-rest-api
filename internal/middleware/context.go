@@ -1,13 +1,11 @@
 package middleware
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo-contrib/echoprometheus"
 	"github.com/labstack/echo/v4"
 	echoMiddleware "github.com/labstack/echo/v4/middleware"
-	"github.com/tashanemclean/calendara-rest-api-api/util/config"
 	"github.com/tashanemclean/calendara-rest-api-api/util/logger"
 )
 
@@ -24,7 +22,7 @@ func Register(e *echo.Echo) {
 	e.Use(echoprometheus.NewMiddleware("calendaraBackend"))
 	e.Use(echoMiddleware.Recover())
 	e.Use(echoMiddleware.CORSWithConfig(echoMiddleware.CORSConfig{
-		AllowOrigins: []string{fmt.Sprintf("http://localhost:%s", config.Config.AppPort), "http://calendara.io", "http://api.backend.calendara.io"},
+		AllowOrigins: []string{"https://calendara.io", "https://api.backend.calendara.io"},
 		AllowMethods: []string{http.MethodOptions, http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 		AllowHeaders: []string{"Accept", "Content-Type"," Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization"},
 	}))
