@@ -6,18 +6,17 @@ import (
 	"github.com/labstack/gommon/log"
 
 	"github.com/labstack/echo/v4"
-	"github.com/tashanemclean/calendara-rest-api-api/args"
 	"github.com/tashanemclean/calendara-rest-api-api/internal/interactor"
 )
 
-func ClassifyText(c echo.Context) error {
-	params, err := GetQueryParams[args.ClassifyText](&c)
+func PromptText(c echo.Context) error {
+	params, err := GetQueryParams(&c)
 	if err != nil {
-		log.Error("Classify Text GetQueryParams error", err)
+		log.Error("Prompt Text GetQueryParams error", err)
 		return err
 	}
 
-	result := interactor.ClassifyText(interactor.ClassifyTextArgs{
+	result := interactor.PromptText(interactor.PromptTextArgs{
 		Activity: params.Activity,
 		Categories: params.Categories,
 		City: params.City,
@@ -26,11 +25,11 @@ func ClassifyText(c echo.Context) error {
 	}).Execute()
 
 	if result.IsError() {
-		log.Error("ClassifyText error", result.AsError())
+		log.Error("PromptText error", result.AsError())
 		return echo.NewHTTPError(http.StatusInternalServerError, result.AsError())
 	}
 
-	log.Info("ClassifyText request", err)
+	log.Info("PromptText request", err)
 
 	return c.JSON(http.StatusOK, result)
 }

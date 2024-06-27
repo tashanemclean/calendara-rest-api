@@ -17,8 +17,6 @@ func RegisterRoutes(e *echo.Echo) {
 
 	v1 := e.Group("/v1")
 
-	// TODO implement protect routes requiring authentication
-
 	// Classification routes
-	v1.POST("/process", handlers.ClassifyText)
+	v1.POST("/process", handlers.PromptText)
 }

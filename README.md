@@ -42,11 +42,11 @@ environment
 
 ### Usage example
 
-The ClassifyText api can be tested via http POST to /v1/classifytext with text
-as payload.
+The ClassifyText api can be tested via http POST to /v1/process with text as
+payload.
 
 ```
-curl --location 'http://localhost:8080/v1/classifytext' \
+curl --location 'http://localhost:8080/v1/process' \
 --header 'Content-Type: application/json' \
 --data '{
     "text": "When was the movie Citizen Kane released?"

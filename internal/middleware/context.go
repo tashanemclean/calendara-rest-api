@@ -22,7 +22,7 @@ func Register(e *echo.Echo) {
 	e.Use(echoprometheus.NewMiddleware("calendaraBackend"))
 	e.Use(echoMiddleware.Recover())
 	e.Use(echoMiddleware.CORSWithConfig(echoMiddleware.CORSConfig{
-		AllowOrigins: []string{"https://calendara.io", "https://api.backend.calendara.io"},
+		AllowOrigins: []string{"*","https://calendara.io", "https://api.backend.calendara.io"},
 		AllowMethods: []string{http.MethodOptions, http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 		AllowHeaders: []string{"Accept", "Content-Type"," Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization"},
 	}))

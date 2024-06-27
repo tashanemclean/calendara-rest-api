@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/tashanemclean/calendara-rest-api-api/internal/classify"
+	"github.com/tashanemclean/calendara-rest-api-api/internal/prompt"
 )
 
 var activitiesIndex = []BaseArgs{
@@ -29,7 +29,7 @@ type BaseArgs struct {
 type ClassificationResult struct {
 	Activities interface{} `json:"Activities"`
 }
-type ClassifyTextArgs struct {
+type PromptTextArgs struct {
 	Activity    []string       `body:"activity"`
   Categories  []string       `body:"categories"`
   City        string         `body:"city"`
@@ -37,14 +37,14 @@ type ClassifyTextArgs struct {
   Days        int            `body:"days"`
 }
 
-type ClassifyTextResult struct {
+type PromptTextResult struct {
 	*BaseResult
 	ClassificationResult interface{}
 }
 
-type classifyText struct {
+type promptText struct {
 	textPrompt string
-	rawDataArgs ClassifyTextArgs
+	rawDataArgs PromptTextArgs
 	errors []error
 	data interface{}
 	// TODO define custom Manager for text classfication
@@ -52,19 +52,20 @@ type classifyText struct {
 
 }
 
-func (ia *classifyText) Execute() ClassifyTextResult {
+func (ia *promptText) Execute() PromptTextResult {
 	ia.prepareData()
-	result, err := classify.ClassifyText(ia.textPrompt)
+	result, err := prompt.PromptText(ia.textPrompt)
 	if err != nil {
 		return ia.fail(err)
 	}
 	ia.data = result
 	return ia.makeResult()
 }
-// 	Loop activities, if payload activity predicate,
+
+// Loop activities, if payload activity predicate,
 // Then set string equal to activity of index
 // Loop categories, if payload category predicate, then set string equal to categories of index
-func (ia *classifyText) prepareData() {
+func (ia *promptText) prepareData() {
 	activitiesData := ia.rawDataArgs.Activity
 	var activities string
 	for idx, elem := range activitiesData {
@@ -90,13 +91,13 @@ func (ia *classifyText) prepareData() {
 	
 	ia.textPrompt = fmt.Sprintf("Find me%v %v, activities in %s %s for %s days", activities, categories, city, state, days)
 }
-func (ia *classifyText) fail(err error) ClassifyTextResult {
+func (ia *promptText) fail(err error) PromptTextResult {
 	ia.errors = append(ia.errors, err)
 	return ia.makeResult()
 }
 
-func (ia *classifyText) makeResult() ClassifyTextResult {
-	return ClassifyTextResult{
+func (ia *promptText) makeResult() PromptTextResult {
+	return PromptTextResult{
 		ClassificationResult: ia.data,
 		BaseResult: &BaseResult{
 			Errors: ia.errors,
@@ -105,8 +106,8 @@ func (ia *classifyText) makeResult() ClassifyTextResult {
 	}
 }
 
-func ClassifyText(args ClassifyTextArgs) Interactor[ClassifyTextResult] {
-	return &classifyText{
+func PromptText(args PromptTextArgs) Interactor[PromptTextResult] {
+	return &promptText{
 		rawDataArgs: args,
 	}
 }
