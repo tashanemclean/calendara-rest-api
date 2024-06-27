@@ -11,12 +11,12 @@ func RegisterRoutes(e *echo.Echo) {
 	// TODO config validatior for server
 
 	// Health check route
-	e.GET("/", handlers.Healthcheck)
+	e.GET("/health", handlers.Healthcheck)
 	e.GET("status", echoprometheus.NewHandler())
 	e.GET("/v1", handlers.Default)
 
 	v1 := e.Group("/v1")
 
 	// Classification routes
-	v1.POST("/process", handlers.PromptText)
+	v1.POST("/processText", handlers.PromptText)
 }

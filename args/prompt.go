@@ -1,6 +1,6 @@
 package args
 
-type ClassifyText struct {
+type PromptText struct {
 	Activity    []string       `body:"activity"`
   Categories  []string       `body:"categories"`
   City        string         `body:"city"`
