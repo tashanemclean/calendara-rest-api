@@ -3,7 +3,7 @@
 ## Section 1: Local Development Environment Setup
 
 This microservice is designed as to be the REST API gateway for the frontend application
-[calendara-backend](https://github.com/tashanemclean/calendara)
+[calendara-frontend](https://github.com/tashanemclean/calendara)
 and the backend serice
 [calendara-backend](https://github.com/tashanemclean/calendara-backend)
 
